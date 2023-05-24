@@ -9,7 +9,7 @@ public:
             sum+=arr[r++];
             while(sum>=k){
                sum-=arr[l++];
-               mini=min(mini,r-l+1);
+               mini=min(mini,r-l+1); //will remove remaining left element and storing minimum index among them
             }
         }
         if(mini<INT_MAX)
