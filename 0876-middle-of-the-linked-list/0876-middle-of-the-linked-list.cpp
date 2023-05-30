@@ -10,24 +10,10 @@
  */
 class Solution {
 public:
-    ListNode* middleNode(ListNode* head) {
-        // ListNode slow=head, fast=head;
-        // while(slow!=null && fast!=null){
-        //     slow=head.next;
-        //     fast=head.next.next;
-        // }
-        // return slow;
-        if(head == NULL || head->next == NULL) return head;
-        if(head->next->next == NULL) return head->next;
-
-        ListNode* slow = head;
-        ListNode* fast = head->next;
-
-        while(fast != NULL){
-            fast = fast->next;
-            if(fast != NULL) fast=fast->next;
-            slow = slow->next;
-        }
+  ListNode* middleNode(ListNode* head) {
+        ListNode *slow = head, *fast = head;
+        while (fast && fast->next)
+            slow = slow->next, fast = fast->next->next;
         return slow;
     }
 };
