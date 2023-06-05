@@ -35,22 +35,16 @@ class Solution
     //Function to reverse a linked list.
     struct Node* reverseList(struct Node *head)
     {
-        if(head==nullptr||head->next==nullptr){
-            return head;
+       Node *p=head, *q=nullptr, *r=nullptr;
+        while(p)
+        {
+            r=q;
+            q=p;
+            p=p->next;
+            q->next=r;
         }
-        Node *temp=head;
-        Node *temp1=nullptr;
-        Node *temp2=head->next;
-        while(temp!=nullptr){
-            temp->next=temp1;
-            temp1=temp;
-            temp=temp2;
-            if(temp2!=nullptr){
-                temp2=temp2->next;
-            }
-        }
-        head=temp1;
-        return head;
+				head=q;
+        return q;
     }
     
 };
