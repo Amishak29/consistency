@@ -91,49 +91,48 @@ class Solution
     //Function to remove a loop in the linked list.
     void removeLoop(Node* head)
     {
-        //Step1: Detect Loop
-        //Step2: Count nodes in loop
-        //Step3: Two pointers with distance loop nodes apart
-        //Step4: Check intersection
-        
-        
-        Node* slow = head;
-        Node* fast = head;
-        
-        //base case
-        
-        if(head == NULL || head->next == NULL)
-            return;
-        
-        if(head->next == head) {
-            head->next = NULL;
-            return;
-        }
-        
-        while(slow && fast && fast->next) {
-            slow = slow->next;
-            fast = fast->next->next;
-            if(fast == slow)
-                break;
-        }
-        
-        if(fast == NULL || fast->next == NULL)
-            return;
-        
-        slow = head;
-        //loop is at head pos 1
-        if(fast == slow)
-            while(fast->next != slow)
+        Node *slow = head, *fast = head;
+            if (!head)
+            {
+                return;
+            }
+            do {
+                slow = slow->next;
                 fast = fast->next;
-        else
-            while(slow->next != fast->next) {
+                if (fast)
+                {
+                    fast = fast->next;
+                    if (fast == slow)
+                    {
+                        break;
+                    }
+                }
+            } while (fast != slow and slow and fast);
+
+            if (!slow or!fast)
+            {
+                return;
+            }
+
+            if(slow==head  and head==fast)
+            {
+                while(fast->next!=slow)
+                {
+                    fast=fast->next;
+                }
+                
+                fast->next=NULL;
+                return;
+            }
+            slow = head;
+
+            while (slow->next != fast->next)
+            {
                 slow = slow->next;
                 fast = fast->next;
             }
-            
-        fast->next = NULL;
 
-        return;
+            fast->next=NULL;
     }
 };
 
