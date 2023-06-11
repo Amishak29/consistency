@@ -1,20 +1,22 @@
 class Solution {
 public:
-     void pS(int ind,vector<int> &nums,vector<int> &v,vector<vector<int>> &ans){
-        if(ind==nums.size()){
-            ans.push_back(v);
-            return;
-        }
-        v.push_back(nums[ind]);
-        pS(ind+1,nums,v,ans);
-        v.pop_back();
-        pS(ind+1,nums,v,ans);
+     
+void generateSubsets(int index, vector<int>& nums, vector<int>& subset, vector<vector<int>>& result) {
+    if (index == nums.size()) {
+        result.push_back(subset);
+        return;
     }
-   
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> ans;
-        vector<int> v;
-        pS(0,nums,v,ans);
-        return ans;
-    }
+
+    generateSubsets(index + 1, nums, subset, result);
+    subset.push_back(nums[index]);
+    generateSubsets(index + 1, nums, subset, result);
+    subset.pop_back();
+}
+
+vector<vector<int>> subsets(vector<int>& nums) {
+    vector<vector<int>> result;
+    vector<int> subset;
+    generateSubsets(0, nums, subset, result);
+    return result;
+}
 };
