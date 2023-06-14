@@ -7,6 +7,8 @@ public:
         return res;
     }
 private:
+    
+    //In summary, the solveNQueens function uses recursive backtracking to explore all possible combinations of queen placements on the chessboard. It iterates over each row and column, marking valid positions with a queen and making recursive calls to explore subsequent rows. After exploring all possibilities for a particular row, it backtracks by resetting the position and continues to explore other combinations.
     void solveNQueens(vector<vector<string> > &res, vector<string> &nQueens, int row, int &n) {
         if (row == n) {
             res.push_back(nQueens);
