@@ -24,52 +24,36 @@ class Solution
     Node *copyList(Node *head)
     {
         //Write your code here
-        if(!head or !head->next) return head;
-        
-        Node *p = head;
-        
-        while(p)
-        {
-            Node *temp = p->next;
-            p->next = new Node(p->data);
-            p->next->next=temp;
-            p=temp;
+        if(!head or !head->next){
+            return head;
         }
-       
-        p=head;
-        while(p)
-        {
-            if(p->arb)
-            {
-                p->next->arb = p->arb->next;
-            }
-            p=p->next->next;
-        }
-        
-        p=head;
-        Node *newHead=p->next;
-        
-        while(p and p->next)
-        {
-            Node *temp=p->next;
-            p->next=p->next->next;
-                if(temp->next)
-            temp->next=temp->next->next;
+        Node *newHead=new Node(-1);
+        Node *p=head, *temp=newHead;
+        while(p){
+            temp->next=new Node(p->data);
             p=p->next;
+            temp=temp->next;
+            
         }
-				/*
-				or
-				while(p)
-        {
-            Node *temp=p->next;
-            if(p->next)
-                p->next=p->next->next;
-            if(temp->next)
-                temp->next=temp->next->next;
+        p=head;
+        newHead=newHead->next;
+        Node *q=newHead;
+
+        unordered_map<Node*, Node*> m;
+        while(p && q){
+            m[p]=q;
             p=p->next;
+            q=q->next;
         }
-				*/
+        p=head, q=newHead;
+        while(p && q){
+            q->arb=m[p->arb];
+            p=p->next;
+            q=q->next;
+        }
         return newHead;
+        
+        
     }
 
 };
