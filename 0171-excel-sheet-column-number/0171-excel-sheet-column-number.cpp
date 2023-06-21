@@ -1,24 +1,24 @@
 class Solution {
 public:
     int titleToNumber(string s) {
-        int n = s.length(); // extracting length of the string
+        int n = s.length();
         
-        if(n == 1) // if length is only 1
+        if(n == 1) 
         {
-            return (s[0] - 'A') + 1; //then return only that position
+            return (s[0] - 'A') + 1; 
         }
         
-        int increase = 0; // variable used to increase the multiplcation
-        int ans = 0; // variable used to store answer
+        int increase = 0;
+        int ans = 0; 
         
-        for(int i = n - 1; i >= 0; i--) // start traversing string from back
+        for(int i = n - 1; i >= 0; i--) 
         {
-            int pos = (s[i] - 'A') + 1; // extracting position
+            int pos = (s[i] - 'A') + 1; 
             
-            ans = ans + (pos * pow(26, increase)); // with base 26, do further calculation
-            increase++; // increase variable
+            ans = ans + (pos * pow(26, increase)); 
+            increase++;
         }
         
-        return ans; // finally return the answer
+        return ans;
     }
 };
