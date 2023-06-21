@@ -25,6 +25,8 @@ class Solution {
                 } else {
                     st.push(i); // Push the index of unmatched closing parenthesis
                 }
+            } else {
+                st.push(i); // Push the index of unmatched closing parenthesis (w)
             }
         }
     }
