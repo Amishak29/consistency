@@ -1,14 +1,17 @@
 class Solution {
 public:
-     vector<int> finalPrices(vector<int>& A) {
-        vector<int> stack;
-        for (int i = 0; i < A.size(); ++i) {
-            while (stack.size() && A[stack.back()] >= A[i]) {
-                A[stack.back()] -= A[i];
-                stack.pop_back();
-            }
-            stack.push_back(i);
+     vector<int> finalPrices(vector<int>& prices) {
+        
+        //its next smaller element to the right
+        stack<int> s;
+        for(int i=prices.size()-1;i>=0;i--)
+        {
+            while(!s.empty() && s.top()>prices[i])
+                s.pop();
+            int x=prices[i];
+            if(!s.empty()) prices[i]-=s.top();
+            s.push(x);
         }
-        return A;
+        return prices;
     }
 };
