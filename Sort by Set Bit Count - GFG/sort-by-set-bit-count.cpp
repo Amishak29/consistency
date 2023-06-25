@@ -6,25 +6,33 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    static int count(int n)
-    {
-        int ans=0;
-        while(n)
-        {
-            n&=(n-1);
-            ans++;
-        }
-        return ans;
-    }
-    static bool comp(int a, int b)
-    {
-        return count(a)>count(b);
-    }
-    void sortBySetBitCount(int arr[], int n)
-    {
-        // Your code goes here
-        stable_sort(arr, arr+n, comp);
-    }
+    // static int count(int n)
+    // {
+    //     int ans=0;
+    //     while(n)
+    //     {
+    //         n&=(n-1);
+    //         ans++;
+    //     }
+    //     return ans;
+    // }
+    // static bool comp(int a, int b)
+    // {
+    //     return count(a)>count(b);
+    // }
+    // void sortBySetBitCount(int arr[], int n)
+    // {
+    //     // Your code goes here
+    //     stable_sort(arr, arr+n, comp);
+    // }
+    static bool comp(int a,int b){
+       return __builtin_popcount(a)>__builtin_popcount(b);
+   }
+   void sortBySetBitCount(int arr[], int n)
+   {
+       // Your code goes here
+       stable_sort(arr,arr+n,comp);
+   }
 };
 
 //{ Driver Code Starts.
