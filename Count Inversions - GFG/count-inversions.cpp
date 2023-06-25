@@ -9,60 +9,63 @@ class Solution{
     // arr[]: Input Array
     // N : Size of the Array arr[]
     // Function to count inversions in the array.
-     #define ll long long 
-    ll merge(long long arr[], ll low, ll mid, ll high,ll N) {
-    vector<ll int> temp; // temporary array
-    ll left = low;      // starting index of left half of arr
-    ll right = mid + 1;   // starting index of right half of arr
-    ll cnt = 0 ;
-    //storing elements in the temporary array in a sorted manner//
-
-    while (left <= mid && right <= high) {
-        if (arr[left] <= arr[right]) {
+       long long merge(long long arr[], long long low, long long mid, long long high) {
+        vector<long long> temp; // temporary array
+        long long left = low;      // starting index of left half of arr
+        long long right = mid + 1;   // starting index of right half of arr
+    
+        //Modification 1: cnt variable to count the pairs:
+        long long cnt = 0;
+    
+        //storing elements in the temporary array in a sorted manner//
+    
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                temp.push_back(arr[left]);
+                left++;
+            }
+            else {
+                temp.push_back(arr[right]);
+                cnt += (mid - left + 1); //Modification 2
+                right++;
+            }
+        }
+    
+        // if elements on the left half are still left //
+    
+        while (left <= mid) {
             temp.push_back(arr[left]);
             left++;
         }
-        else { //right smaller 
-            
+    
+        //  if elements on the right half are still left //
+        while (right <= high) {
             temp.push_back(arr[right]);
-            cnt += (mid - left +1);
             right++;
         }
+    
+        // transfering all elements from temporary to arr //
+        for (long long i = low; i <= high; i++) {
+            arr[i] = temp[i - low];
+        }
+    
+        return cnt; // Modification 3
     }
-
-    // if elements on the left half are still left //
-
-    while (left <= mid) {
-        temp.push_back(arr[left]);
-        left++;
+    
+    long long mergeSort(long long arr[], long long  low, long long high) {
+        long long cnt = 0;
+        if (low >= high) return cnt;
+        long long mid = (low + high) / 2 ;
+        cnt += mergeSort(arr, low, mid);  // left half
+        cnt += mergeSort(arr, mid + 1, high); // right half
+        cnt += merge(arr, low, mid, high);  // merging sorted halves
+        return cnt;
     }
-
-    //  if elements on the right half are still left //
-    while (right <= high) {
-        temp.push_back(arr[right]);
-        right++;
-    }
-
-    // transfering all elements from temporary to arr //
-    for (int i = low; i <= high; i++) {
-        arr[i] = temp[i - low];
-    }
-    return cnt;
-}
-
-ll mergeSort(long long arr[], ll low, ll high ,ll N) {
-    ll cnt = 0 ;
-    if (low >= high) return cnt;
-    ll mid = (low + high) / 2 ;
-    cnt += mergeSort(arr, low, mid,N);  // left half
-    cnt += mergeSort(arr, mid + 1, high,N); // right half
-    cnt +=  merge(arr, low, mid, high,N);
-    return cnt;  // merging sorted halves
-}
-    long long int inversionCount(long long arr[], long long N)
+    
+    long long int inversionCount(long long arr[], long long n)
     {
-        // Your Code Here
-        return mergeSort(arr,0,N-1,N);
+        return mergeSort(arr, 0, n - 1);
+        
     }
 
 };
