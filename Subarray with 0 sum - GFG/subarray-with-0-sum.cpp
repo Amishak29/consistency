@@ -9,7 +9,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-
+    //Complete this function
+    //Function to check whether there is a subarray present with 0-sum or not.
     bool subArrayExists(int arr[], int n)
     {
         unordered_set<int> s;
