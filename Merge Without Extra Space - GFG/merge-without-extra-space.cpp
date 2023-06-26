@@ -6,32 +6,31 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-        //Function to merge the arrays.
-        void merge(long long arr1[], long long arr2[], int n, int m) 
-        { 
-             vector<int> ans;
-            for(int i=0;i<n;i++)
-            {
-                ans.push_back(arr1[i]);
-            }
-            for(int j=0;j<m;j++)
-            {
-                ans.push_back(arr2[j]);
-            }
-            sort(ans.begin(),ans.end());
-            
-            int k=0;
-             for(int i=0;i<n;i++)
-            {
-                arr1[i]=ans[k++];// k ka value is changes to n now
-            }
-            for(int j=0;j<m;j++)
-            {
-                arr2[j]=ans[k++];
-            }
-            
-        } 
-      
+//Function to merge the arrays.
+void merge(long long arr1[], long long arr2[], int n, int m)
+{
+vector<int> ans;
+for(int i=0;i<n;i++)
+{
+ans.push_back(arr1[i]);
+}
+for(int j=0;j<m;j++)
+{
+ans.push_back(arr2[j]);
+}
+sort(ans.begin(),ans.end());
+ int k=0;
+         for(int i=0;i<n;i++)
+        {
+            arr1[i]=ans[k++];// k ka value is changes to n now
+        }
+        for(int j=0;j<m;j++)
+        {
+            arr2[j]=ans[k++];
+        }
+
+    }
+
 };
 
 //{ Driver Code Starts.
