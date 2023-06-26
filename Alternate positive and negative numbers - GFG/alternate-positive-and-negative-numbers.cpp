@@ -7,28 +7,28 @@ using namespace std;
 //User function template for C++
 class Solution{
 public:
+void rearrange(int arr[], int n) {
+  queue<int> pos;
+    queue<int> neg;
+    for(int i=0;i<n;i++){
+        if(arr[i]>=0)
+            pos.push(arr[i]);
+        else
+            neg.push(arr[i]);
 
-	void rearrange(int arr[], int n) {
-	  queue<int> pos;
-        queue<int> neg;
-        for(int i=0;i<n;i++){
-            if(arr[i]>=0)
-                pos.push(arr[i]);
-            else
-                neg.push(arr[i]);
-           
+    }
+    for(int i=0;i<n;){
+        if(pos.size()!=0){
+            arr[i++]=pos.front();
+            pos.pop();
         }
-        for(int i=0;i<n;){
-            if(pos.size()!=0){
-                arr[i++]=pos.front();
-                pos.pop();
-            }
-            if(neg.size()!=0){
-                arr[i++]=neg.front();
-                neg.pop();
-            }
+        if(neg.size()!=0){
+            arr[i++]=neg.front();
+            neg.pop();
         }
-	}	
+    }
+}
+
 };
 
 //{ Driver Code Starts.
