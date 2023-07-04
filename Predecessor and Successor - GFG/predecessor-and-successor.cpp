@@ -40,29 +40,39 @@ class Solution
 {
     public:
     void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
-{
-    if (!root) {
-        return;
+    {
+        // Your code goes here
+        Node *temp=root;
+        pre=nullptr;
+        while(temp)
+        {
+            if(key<=temp->key)
+            {
+                temp=temp->left;
+            }
+            else
+            {
+                pre=temp;
+                temp=temp->right;
+            }
+        }
+        
+        suc=nullptr;
+        temp=root;
+        while(temp)
+        {
+            if(key<temp->key)
+            {
+                suc=temp;
+                temp=temp->left;
+            }
+            else
+            {
+                temp=temp->right;
+            }
+        }
+        
     }
-    else if (root->key > key) {
-        if (suc && root->key < suc->key) {
-            suc = root;
-        }
-        else if (!suc) {
-            suc = root;
-        }
-    }
-    else if (root->key < key) {
-        if (pre && root->key > pre->key) {
-            pre = root;
-        }
-        else if (!pre) {
-            pre = root;
-        }
-    }
-    findPreSuc(root->left, pre, suc, key);
-    findPreSuc(root->right, pre, suc, key);
-}
 
 };
 
