@@ -15,6 +15,5 @@ public:
         if(mini<INT_MAX)
         return mini;
         else return 0;
-    
     }
 };
