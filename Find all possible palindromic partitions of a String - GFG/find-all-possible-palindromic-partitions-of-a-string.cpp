@@ -21,13 +21,21 @@ void partioning(string s,int index,int n,vector<string> &path){
         ans.push_back(path);
         return;
     }
-    for(int i=index;i<n;i++){
-        if(ispalindrome(s,index,i)){
-            path.push_back(s.substr(index,i-index+1));
-            partioning(s,i+1,n,path);
-            path.pop_back();
-        }
+    for (int i = index; i < n; i++) {
+    // Check if the substring from index to i is a palindrome
+    if (ispalindrome(s, index, i)) {
+        // If it's a palindrome, add it to the current partition
+        path.push_back(s.substr(index, i - index + 1));
+
+        // Recursively call the function for the rest of the string
+        partioning(s, i + 1, n, path);
+
+        // After the recursive call returns, remove the last added substring
+        // This is done to explore other possible partitions
+        path.pop_back();
     }
+}
+
 }
 vector<vector<string>> allPalindromicPerms(string S) {
     vector<string> path;
