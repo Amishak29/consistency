@@ -41,30 +41,22 @@ class Solution
 {
     public:
     //Function to return list containing elements of right view of binary tree.
-    void solve(Node* root,vector<int>&v,int level)
+    void helper(vector<int> &res, Node *root, int level)
     {
-        if(root==NULL)
-        return ;
-        
-        if(v.size()==level)
-        {
-            v.push_back(root->data);
-        }
-        
-        solve(root->right,v,level+1);
-        solve(root->left,v,level+1);
+        if(root == NULL)
+            return;
+        if(level == res.size())
+            res.push_back(root->data);
+        helper(res, root->right, level + 1);
+        helper(res, root->left, level + 1);
     }
-    
     vector<int> rightView(Node *root)
     {
-       vector<int>v;
-       if(root==NULL)
-       return v;
-       
-       solve(root,v,0);
-       return v;
-       
+       vector<int>res;
+       helper(res, root, 0);
+       return res;
     }
+    
 };
 
 
