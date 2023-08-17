@@ -18,7 +18,7 @@ struct Node
 void printList(Node* node) 
 { 
     while (node != NULL) { 
-        cout << node->data; 
+        cout << node->data%10; 
         node = node->next; 
     }  
     cout<<"\n";
@@ -46,51 +46,42 @@ struct Node
 class Solution
 {
     public:
-    Node* reverse(Node* head) {
-    Node* prev = nullptr;
-    Node* current = head;
-    Node* next = nullptr;
-
-    while (current != nullptr) {
-        next = current->next;
-        current->next = prev;
-        prev = current;
-        current = next;
-    }
-
-    return prev;
-}
-
-Node* addOne(Node* head) {
-    // Reverse the linked list
-    Node* new_head = reverse(head);
-    Node* current = new_head;
-    Node* prev = nullptr;
-    Node* current1 = new_head;
-    int carry = 0;
-
-    while (current != nullptr) {
-        int sum = 0;
-
-        if (prev == nullptr) {
-            sum = current->data + 1;
-        } else {
-            sum = current->data + carry;
+    Node *rev(Node *head)
+    {
+        if(!head or !head->next)
+        {
+            return head;
         }
-
-        carry = sum / 10;
-        current->data = sum % 10;
-        prev = current;
-        current = current->next;
+        Node *p=head, *q=NULL, *r=NULL;
+        while(p)
+        {
+            r=q;
+            q=p;
+            p=p->next;
+            q->next=r;
+        }
+        return q;
     }
-
-    if (carry == 1) {
-        Node* new_node = new Node(1);
-        prev->next = new_node;
+    Node* addOne(Node *head) 
+    {
+        head=rev(head);
+        Node *p=head;
+        while(p){
+            if(p->data<9){
+               p->data++;
+                head=rev(head);
+                return head;
+            }
+            else
+            {
+                p->data=0;
+                p=p->next;
+            }
+        }
+        struct Node *dummy = new Node(1);
+        dummy->next=head;
+        return dummy;
     }
-
-    return reverse(current1);
-}
 };
 
 //{ Driver Code Starts.
