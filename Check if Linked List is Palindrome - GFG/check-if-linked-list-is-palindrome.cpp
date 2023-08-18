@@ -28,28 +28,44 @@ struct Node {
   }
 };
 */
-
 class Solution{
   public:
     //Function to check whether the list is palindrome.
+    Node *rev(Node *head)
+    {
+        if(!head or !head->next)
+        {
+            return head;
+        }
+        
+        Node *p=head, *q=NULL, *r=NULL;
+        while(p)
+        {
+            r=q;
+            q=p;
+            p=p->next;
+            q->next = r;
+        }
+        
+        return q;
+    }
     bool isPalindrome(Node *head)
     {
-        //Your code here
-        Node* slow=head;
-        stack<int> s;
-        while(slow!=NULL){
-            s.push(slow->data);
-            slow=slow->next;
+        int a=0;
+        Node *p=head;
+        while(p)
+        {
+            a+=a*10+p->data;
+            p=p->next;
         }
-        while(head!=NULL){
-            int i=s.top();
-            s.pop();
-            if(head->data!=i){
-                return false;
-            }
-            head=head->next;
+        p=rev(head);
+        int b=0;
+        while(p)
+        {
+            b+=b*10+p->data;
+            p=p->next;
         }
-        return true;
+        return a==b;
     }
 };
 
