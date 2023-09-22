@@ -9,18 +9,17 @@ using namespace std;
 
 class Solution{   
 public:
-int getPairsCount(int arr[], int n, int k) {
-// code here
-int ans=0;
-unordered_map<int,int>m;
-for(int i=0;i<n;i++){
-int b=k-arr[i];
-if(m[b]){
-ans+=m[b]; //checking if b(k-arr[i]) is already present in th map
-}
-m[arr[i]]++; //by default toh sab map me daalna hi hai
-}
-return ans;
+    int getPairsCount(int arr[], int n, int k) {
+    // code here
+    unordered_map<int,int> mp;
+    int count = 0;
+    for(int i=0;i<n;i++)
+    {
+        if(mp.find(k-arr[i]) != mp.end())
+            count += mp[k-arr[i]];
+        mp[arr[i]]++;
+    }
+    return count;
 }
 };
 
