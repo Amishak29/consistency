@@ -6,54 +6,37 @@ using namespace std;
 // } Driver Code Ends
 class Solution
 {
-   
-public:
+    public:    
+       vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
+        {
+             map<int,int> m;
+            for(int i=0; i<n1; i++) {
+                if(a[i]==a[i-1])
+                continue;
+                m[a[i]]++;
+            }
+            for(int i=0; i<n2; i++) {
+                if(b[i]==b[i-1])
+                continue;
+                m[b[i]]++;
+            }
+            for(int i=0; i<n3; i++) {
+                if(c[i]==c[i-1])
+                continue;
+                m[c[i]]++;
+            }
+            vector<int> v;
+            for(auto i : m) {
+                if(i.second>2) {
+                    v.push_back(i.first);
+                }
+            }
+            if(v.empty()) {
+                return {-1};
+            }
+            return v;
+        }
 
-vector<int> commonElements(int a[], int b[], int c[], int n1, int n2, int n3) {
-unordered_map<int, int> m1, m2, m3;
-for(int i = 0; i < n1; i++) {
-    m1[a[i]]++;
-}
-for(int i = 0; i < n2; i++) {
-    m2[b[i]]++;
-}
-for(int i = 0; i < n3; i++) {
-    m3[c[i]]++;
-}
-vector<int> v;
-for(int i = 0; i < n1; i++) {
-    if(m1[a[i]] > 0 && m2[a[i]] > 0 && m3[a[i]] > 0) {
-        v.push_back(a[i]);
-        m1[a[i]] = 0; // Marking the element as processed to avoid duplicates
-    }
-}
-
-return v;
-// vector<int> result;
-
-// int i = 0, j = 0, k = 0;
-// while (i < n1 && j < n2 && k < n3) {
-
-//     if (A[i] == B[j] && B[j] == C[k]) {
-
-//         if (result.empty() || result.back() != A[i]) {
-//             result.push_back(A[i]);
-//         }
-//         i++; j++; k++;
-//     }
-//     // If the current element in A is smaller than the other two arrays
-//     else if (A[i] < B[j])
-//         i++; // Move pointer in A ahead
-
-//     else if (B[j] < C[k])
-//         j++;
-
-//     else
-//         k++;
-// }
-
-// return result;
-}
 };
 
 //{ Driver Code Starts.
