@@ -1,26 +1,32 @@
 class Solution {
 public:
-    vector<vector < int>> merge(vector<vector < int>> &arr)
-        {
-            sort(arr.begin(), arr.end());
-            int n = arr.size(), i = 0;
-            vector<vector < int>> ans;
-            while (i < n)
-            {
-                int low = arr[i][0], high = arr[i][1];
-                i++;
-                while (i < n and arr[i][0] >= low and arr[i][0] <= high)
-                {
-                    high = max(high, arr[i][1]);
-                    i++;
-                }
+    vector<vector<int>> merge(vector<vector<int>> &arr) {
+    int n = arr.size();
+    sort(arr.begin(), arr.end());
 
-                vector<int> temp;
-                temp.push_back(low);
-                temp.push_back(high);
-                ans.push_back(temp);
-            }
+    vector<vector<int>> ans;
 
-            return ans;
+    for (int i = 0; i < n; i++) { // select an interval:
+        int start = arr[i][0];
+        int end = arr[i][1];
+
+        //Skip all the merged intervals:
+        if (!ans.empty() && end <= ans.back()[1]) {
+            continue;
         }
+
+        //check the rest of the intervals:
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j][0] <= end) {
+                end = max(end, arr[j][1]);
+            }
+            else {
+                break;
+            }
+        }
+        ans.push_back({start, end});
+    }
+    return ans;
+}
+
 };
