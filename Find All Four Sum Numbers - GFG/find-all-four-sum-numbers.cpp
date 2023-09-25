@@ -8,9 +8,7 @@ using namespace std;
 
 class Solution{
     public:
-    // arr[] : int input array of integers
-    // k : the quadruple sum required
-    vector<vector<int> > fourSum(vector<int> &arr, int k) {
+      vector<vector<int> > fourSum(vector<int> &arr, int k) {
         sort(arr.begin(),arr.end());
         set<vector<int>>s;
         vector<vector<int>>v;
