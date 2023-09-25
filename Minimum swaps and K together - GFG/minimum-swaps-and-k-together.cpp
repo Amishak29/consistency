@@ -13,31 +13,32 @@ class Solution
 {
 public:
     int minSwap(int arr[], int n, int k) {
-        // Complet the function
-        int count=0;
-        for(int i=0;i<n;i++){
-            if(arr[i]<=k){
-                count++;
-            }
+    int good = 0, bad = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] <= k) {
+            good++;
         }
-        int kgreater=0;
-        for(int i=0;i<count;i++){
-            if(arr[i]>k){
-                kgreater++;
-            }
-        }
-        int ans=kgreater;
-        for(int i=0,j=count;j<n;i++,j++){
-            if(arr[i]>k){
-                kgreater--;
-            }
-            if(arr[j]>k){
-                kgreater++;
-            }
-            ans=min(ans,kgreater);
-        }
-        return ans;
     }
+    for (int i = 0; i < good; i++) {
+        if (arr[i] > k) {
+            bad++;
+        }
+    }
+    int i = 0, j = good, ans = bad;
+    while (j < n) {
+        if (arr[i] > k) {
+            bad--;
+        }
+        if (arr[j] > k) {
+            bad++;
+        }
+        ans = min(ans, bad);
+        i++;
+        j++;
+    }
+    return ans;
+}
+
 };
 
 
