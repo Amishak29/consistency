@@ -3,9 +3,6 @@ public:
     int countSubstrings(string& s) {
        return tabulation(s);
     }
-    
-    // 1. recursive
-    // Time: O(n ^ 3)
     int recursive(string& s) {
         int count = 0;
         for(int i = 0; i < s.size(); ++i) {
@@ -16,16 +13,12 @@ public:
         return count;
     }
     
-    // return 1 if s[i..j] is palindromic, 0 otherwise.
     int helper(string& s, int i, int j) {
         if (i >= j) return 1;
         return s[i] == s[j] ? helper(s, i+1, j-1) : 0;
     }
     
-    
-    // 2. memoization
-    // Time: O(n ^ 2)
-    // space: O(n ^ 2)
+
     int memoization(string& s) {
         vector<vector<int>> mem(s.size(), vector<int>(s.size(), -1));
         int count = 0;
@@ -43,10 +36,6 @@ public:
         return mem[i][j] = s[i] == s[j] ? solve(mem, s, i+1, j-1) : 0;
     }
     
-    
-    // 3. tabulation
-    // time: O(n ^ 2)
-    // space: O(n ^ 2)
     int tabulation(string& s) {
         vector<vector<int>> tab(s.size(), vector<int>(s.size()));
         int count = 0;
