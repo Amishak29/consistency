@@ -1,16 +1,21 @@
 class Solution {
 public:
     vector<int> intersection(vector<int>& arr1, vector<int>& arr2) {
-    unordered_set<int> set1(arr1.begin(), arr1.end());
+        vector<int> ans;
+        
+        for (int i = 0; i < arr1.size(); i++) {
+            int element = arr1[i];
+            for (int j = 0; j < arr2.size(); j++) {
+                if (arr2[j] == element) {
+                    ans.push_back(arr2[j]);
+                    arr2[j] = INT_MIN; 
+                    break;
+                }
+            }
+            arr1[i] = INT_MAX; 
+        }
 
-    vector<int> intersection;
-    for (int num : arr2) {
-    if (set1.find(num) != set1.end()) {
-        intersection.push_back(num);
-        set1.erase(num);
-    }
-}
-
-    return intersection;
+        unordered_set<int> uniqueElements(ans.begin(), ans.end());
+        return vector<int>(uniqueElements.begin(), uniqueElements.end());
     }
 };
